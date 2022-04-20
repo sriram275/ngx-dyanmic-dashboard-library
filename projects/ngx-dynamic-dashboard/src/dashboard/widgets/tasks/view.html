@@ -1,0 +1,76 @@
+<!--tasks view -->
+<div class="widget panel panel-default">
+
+    <dashboard-widget-header (mouseover)="showWidgetControls(true)"
+                       (mouseleave)="showWidgetControls(false)"
+                       [globalOptions]="globalOptions"
+                       [title]="title"
+                       [inRun]="inRun"
+                       [inConfig]="inConfig"
+                       [actionInitiated]="actionInitiated"
+                       [showOperationControls]="showOperationControls"
+                       [widgetHasOperationControls]="widgetHasOperationControls"
+                       [showConfigurationControl]="showConfigurationControl"
+                       [showControls]="showControls"
+                       (toggleConfigModeEvent)="toggleConfigMode()"
+                       (removeEvent)="remove()"
+                       (runEvent)="run()"
+                       (stopEvent)="stop()">
+    </dashboard-widget-header>
+
+    <!-- *ngIf="filter.show" ng-repeat="filter in config.displayFilters" -->
+    <div class="panel-body in collapse">
+        <div class="dashboard-tile" *ngIf="!inConfig">
+            <div class="row">
+                <div class="dashboard-tile-insight col-xs-4">
+                    <div class="tile-insight-label">
+                       New Tasks
+                    </div>
+                    <div class="tile-insight-value"  style="color: rgb(0, 124, 208);">
+                        
+                        <div>0</div>
+                    </div>
+                </div>
+                <div class="dashboard-tile-insight col-xs-4">
+                    <div class="tile-insight-label">
+                       Expire Soon
+                    </div>
+                    <div class="tile-insight-value"  style="color: rgb(236, 139, 0);">
+                        
+                        <div>0</div>
+                    </div>
+                </div>
+                <div class="dashboard-tile-insight col-xs-4">
+                    <div class="tile-insight-label">
+                       Claimed
+                    </div>
+                    <div class="tile-insight-value"  style="color: rgb(0, 124, 208);">
+                        
+                        <div>0</div>
+                    </div>
+                </div>
+            </div>
+            <hr class="hr-dark hr-spacer-sm">
+            <div class="label-section-inline-block">
+                Total Tasks:
+                <div class="label-section-value">
+                    <div>0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <dashboard-dynamic-form *ngIf="inConfig"
+                      [widgetTags]="widgetTags"
+                      [propertyPages]="propertyPages"
+                      [instanceId]="instanceId"
+                      (updatePropertiesEvent)="updateProperties($event)">
+    </dashboard-dynamic-form>
+
+    <!-- <dashboard-error-handler
+            [errorObject]="errorObject"
+            [errorExists]="errorExists">
+    </dashboard-error-handler> -->
+
+</div>
+

@@ -1,0 +1,17 @@
+<br>
+The following options control various aspects of the board's and widget's behavior. Changes take effect immediately.
+<br>
+<br>
+
+<mat-slide-toggle
+    (change)="onHooverOptionChange($event)"
+    [checked]="enableHover">
+    Always show the widget buttons in the title. By default buttons show/hide when you hover over the title.
+</mat-slide-toggle>
+<br>
+<br>
+<mat-slide-toggle
+    (change)="onDisplayWidgetOptionsInSideBarChange($event)"
+    [checked]="displayWidgetOptionsInSideBar">
+    (Experimental) When set the options are displayed in the side bar. Otherwise it is displayed within the widget.
+</mat-slide-toggle>

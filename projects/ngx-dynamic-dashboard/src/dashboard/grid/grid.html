@@ -1,0 +1,29 @@
+<div class="dashboard ui centered stackable grid">
+    <div *ngFor="let row of model.rows; let r = index" [ngClass]="{'short-row': row.columns.length > 3, 'tall-row': row.columns.length <= 3 }"
+         class="row">
+
+        <ng-container cdkDropListGroup>
+            <div (cdkDropListDropped)="updateWidgetPositionInBoard($event, c , r, 'column')" *ngFor="let col of row.columns; let c = index" cdkDropList
+                 class="{{col.styleClass}} column col-md-4">
+
+                <div *ngIf="!col.widgets || col.widgets.length== 0" [ngClass]="{'short-row': row.columns.length > 3, 'tall-row': row.columns.length <= 3 }"
+                     class="ui center aligned massive info message"
+                     style="text-align:center">
+
+                    <span style="font-size: .75em">Add Widget qweq!</span>
+
+                </div>
+                <dashboard-grid-cell *ngFor="let cellWidget of col.widgets" [cdkDragData]="cellWidget.instanceId" [widgetConfig]="cellWidget.config"
+                                     [widgetInstanceId]="cellWidget.instanceId"
+                                     [widgetTags]="cellWidget.tags"
+                                     [widgetType]="cellWidget.componentType"
+                                     cdkDrag
+                                     class="target-box"
+                >
+                    <div *cdkDragPlaceholder class="target-box-placeholder"></div>
+                </dashboard-grid-cell>
+            </div>
+        </ng-container>
+    </div>
+</div>
+<dashboard-toast></dashboard-toast>

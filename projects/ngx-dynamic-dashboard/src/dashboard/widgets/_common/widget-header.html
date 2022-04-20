@@ -1,0 +1,27 @@
+<div class="panel-heading clearfix">
+    <h3 class="panel-title">{{title}}</h3>
+    <div class="panel-heading-actions">
+
+        <!-- <button (click)="remove()"
+            *ngIf="showControls || globalOptions.enableHover" class="compact ui button right floated">
+        <i class="trash icon" style="margin-right:0 !important"></i>
+        </button> -->
+        <button (click)="toggleConfigMode()"
+                *ngIf="showControls || globalOptions.enableHover && showConfigurationControl" class="btn btn-icon">
+            <i class="icon icon-manage" style="margin-right:0 !important"></i>
+        </button>
+    </div>
+    
+
+    <dashboard-widget-operation-control (runEvent)="run()"
+                                        (stopEvent)="stop()"
+                                        *ngIf="showControls || globalOptions.enableHover"
+                                        [actionInitiated]="actionInitiated"
+                                        [widgetHasOperationControls]="widgetHasOperationControls"
+                                        [inConfig]="inConfig"
+                                        [inRun]="inRun"
+                                        [showOperationControls]="showOperationControls">
+
+    </dashboard-widget-operation-control>
+
+</div>

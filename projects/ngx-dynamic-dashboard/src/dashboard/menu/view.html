@@ -1,0 +1,76 @@
+<div class="dashboard-actions-wrappers">
+    <div class="row">
+        <div class="col-md-12 dashboard-title">
+            <div class="btn-toolbar pull-right dashboard-buttons spacer-out-bottom-sm">
+                <div class="btn-group" role="group" *ngIf="editMode" aria-label="Dashboard Actions">
+                    <button type="button" id="addWidgetDialogBtn" class="btn btn-default btn-no-trans" 
+                        (click)="openModal(addWidgetModal)" title="Add new widget" aria-label="Add new widget">
+                            <i class="icon icon-plus"></i>
+                            <span translate="">Widgets</span>
+                    </button>
+            
+                    <button type="button" id="editDashboardDialogBtn" class="btn btn-default btn-no-trans" 
+                        (click)="toggleLayoutSideBar()" title="Edit dashboard layout" aria-label="Edit dashboard layout">
+                            <i class="icon icon-layout"></i>
+                            <span translate="">Layout</span>
+                    </button>
+                </div>
+
+                <!-- Cancel/Save Buttons while Editing -->
+                <div class="btn-group" role="group" *ngIf="editMode">
+                    <button type="button" class="btn btn-default btn-no-trans" (click)="cancelEditMode()" aria-label="Cancel editing the dashboard">
+                        <i class="icon icon-cancel adf-flip"></i>
+                        <span translate>
+                            Cancel
+                        </span>
+                    </button>
+                    <button type="button" class="btn btn-default btn-no-trans" (click)="saveDashboard()">
+                        <i class="icon icon-save"></i>
+                        <span translate>
+                            Save
+                        </span>
+                    </button>
+                </div>
+    
+                <div class="btn-group">
+                    <!-- Edit Dashboard -->
+                    <button type="button" id="editDashboardBtn" class="btn btn-icon btn-no-trans" *ngIf="!editMode" (click)="toggleEditMode()" aria-label="Edit My Dashboard" title="Edit My Dashboard">
+                        <!-- <i class="icon icon-circle-horz-menu"></i> -->
+                        <i class="icon pencil"></i>
+                        <span class="sr-only" translate="">Edit My Dashboard</span>
+                    </button><!-- end ngIf: $root.isDashboardEditable() && !editMode -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<button type="button" class="btn btn-primary" (click)="openModal(testtempl)">Create template modal</button>
+ 
+<ng-template #testtempl>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    This is a modal.
+  </div>
+</ng-template>
+
+<!-- the modal will emit an event and call the grid component to add the requested cell to the board -->
+<ng-template #addWidgetModal>
+    <dashboard-add-widget-modal
+    (addWidgetEvent)="emitBoardAddWidgetEvent($event)">
+</dashboard-add-widget-modal>
+</ng-template>
+
+
+
+<div #layoutSideBar_tag class="ui sidebar inverted right vertical menu">
+    <dashboard-layout-manager-modal (boardLayoutChangeEvent)="emitBoardChangeLayoutEvent($event)"
+                                    [layoutId]="layoutId">
+    </dashboard-layout-manager-modal>
+</div>
+
